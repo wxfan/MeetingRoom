@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../data-source';
 import { MeetingRoom } from '../entities/MeetingRoom';
+import { Assignment } from '../entities/Assignment';
 
 export class MeetingRoomController {
   // 获取所有会议室
@@ -97,6 +98,35 @@ export class MeetingRoomController {
       }
     } catch (error) {
       res.status(500).json({ message: '删除会议室失败', error });
+    }
+  }
+
+  // New method for seat assignment
+  static async assignSeat(req: Request, res: Response) {
+    try {
+      const assignmentRepo = AppDataSource.getRepository(Assignment);
+      const assignment = assignmentRepo.create({
+        ...req.body,
+        assignmentDate: new Date()
+      });
+      await assignmentRepo.save(assignment);
+      res.status(201).json(assignment);
+    } catch (error) {
+      res.status(500).json({ message: '座位分配失败', error });
+    }
+  }
+
+  // New method to get assignments
+  static async getAssignments(req: Request, res: Response) {
+    try {
+      const assignmentRepo = AppDataSource.getRepository(Assignment);
+      const assignments = await assignmentRepo.find({
+        relations: ['meetingRoom'],
+        where: { meetingRoom: { id: req.params.roomId } }
+      });
+      res.json(assignments);
+    } catch (error) {
+      res.status(500).json({ message: '获取分配信息失败', error });
     }
   }
 }

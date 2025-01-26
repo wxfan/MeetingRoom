@@ -1,19 +1,25 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { MeetingRoom } from './MeetingRoom';
 
 @Entity()
 export class SeatRule {
   @PrimaryGeneratedColumn()
-  id: number=0;
+  id: number = 0;
 
   @Column()
-  department: string='';
+  department: string = '';
 
   @Column()
-  positionLevel: number=0;
+  positionLevel: number = 0;
 
   @Column({ type: 'enum', enum: ['standard', 'vip', 'wheelchair'] })
-  seatType: string='standard';
+  seatType: string = 'standard';
 
   @Column()
-  zoneName: string='';
+  zoneName: string = '';
+
+  // Add meeting room relation
+  @ManyToOne(() => MeetingRoom)
+  @JoinColumn()
+  meetingRoom: MeetingRoom;
 }
