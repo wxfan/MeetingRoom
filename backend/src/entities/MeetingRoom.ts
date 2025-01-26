@@ -4,16 +4,21 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 interface Room {
   id: string;
   name: string;
-  layout: SeatLayout[];
+  zones: Zone[];  // Changed from layout to zones
 }
 
 // 座位数据结构
 interface SeatLayout {
-  seatId: string;
+  seatNumber: string;  // Added seat number (e.g., "A3")
   type: 'standard' | 'vip' | 'wheelchair';
   coordinates: { x: number; y: number };
   rotation?: number;
   capacity?: number;
+}
+
+interface Zone {
+  zoneName: string;
+  layout: SeatLayout[];
 }
 
 @Entity()
