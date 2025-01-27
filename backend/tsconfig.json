@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    /* 基本选项 */
+    "target": "ES2022", // 编译目标版本
+    "module": "CommonJS", // 模块系统
+    "lib": ["ES2022", "DOM"], // 使用的库文件
+    "outDir": "./dist", // 输出目录
+    "rootDir": "./src", // 源码目录
+    "strict": true, // 启用所有严格类型检查选项
+    "esModuleInterop": true, // 允许 CommonJS/AMD/UMD 模块的默认导入
+    "skipLibCheck": true, // 跳过库文件的类型检查
+    "forceConsistentCasingInFileNames": true, // 强制文件名大小写一致
+
+    /* 模块解析选项 */
+    "moduleResolution": "Node", // 模块解析策略
+    "baseUrl": "./", // 解析非相对模块的基地址
+    "paths": {
+      "@/*": ["src/*"] // 路径别名
+    },
+
+    /* 类型检查选项 */
+    "noImplicitAny": true, // 禁止隐式的 any 类型
+    "strictNullChecks": true, // 严格的 null 检查
+    "strictFunctionTypes": true, // 严格的函数类型检查
+    "strictBindCallApply": true, // 严格的 bind/call/apply 检查
+    "strictPropertyInitialization": true, // 严格的类属性初始化检查
+    "noUnusedLocals": true, // 检查未使用的局部变量
+    "noUnusedParameters": true, // 检查未使用的函数参数
+    "noImplicitReturns": true, // 检查函数是否有隐式返回
+    "noFallthroughCasesInSwitch": true, // 检查 switch 语句的贯穿情况
+
+    /* 源映射选项 */
+    "sourceMap": true, // 生成源映射文件
+    "inlineSources": true, // 将源码嵌入到源映射文件中
+
+    /* 实验性选项 */
+    "experimentalDecorators": true, // 启用装饰器支持
+    "emitDecoratorMetadata": true, // 为装饰器生成元数据
+
+    /* 其他选项 */
+    "resolveJsonModule": true, // 允许导入 JSON 文件
+    "isolatedModules": true, // 确保每个文件可以单独编译
+    "noEmitOnError": true, // 如果有错误，不生成输出文件
+    "incremental": true // 启用增量编译
+  },
+  "include": ["src/**/*"], // 包含的文件
+  "exclude": ["node_modules", "dist", "test"] // 排除的文件
+}
