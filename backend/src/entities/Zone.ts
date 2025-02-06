@@ -10,8 +10,8 @@ export class Zone {
   @Column()
   name: string;
 
-  @Column({ type: 'enum', enum: ['department', 'position'] })
-  category: 'department' | 'position';
+  @Column({ type: 'enum', enum: ['vvip', 'vip', 'normal'] })
+  category: 'vvip' | 'vip' | 'normal' ;
 
   @Column({ default: 0 })
   capacity: number; // 区域容量
@@ -25,7 +25,7 @@ export class Zone {
   // add constructor
   constructor() {
     this.name = "";
-    this.category = "department";
+    this.category = "normal";
     this.capacity = 0;
   }
 

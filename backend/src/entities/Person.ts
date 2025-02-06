@@ -1,36 +1,39 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+// src/entities/Person.ts
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from 'typeorm';
 import { Assignment } from './Assignment';
+import { Meeting } from './Meeting';
+import { Department } from './Department';
+import { JobTitle } from './JobTitle';
 
 @Entity()
 export class Person {
     @PrimaryGeneratedColumn('uuid')
     id!: string;
 
-  @Column({ unique: true })
-  account: string; // 账号
+    @Column()
+    name: string;
 
-  @Column()
-  name: string; // 姓名
+    @Column()
+    account: string;
 
-  @Column()
-  department: string; // 部门
+    @Column()
+    contact: string;
 
-  @Column()
-  position: string; // 岗位
+    @Column()
+    department!: Department;
 
-  @Column()
-  contact: string; // 联系方式
+    @Column()
+    jobTitle!: JobTitle;
 
-  @OneToMany(() => Assignment, assignment => assignment.person)
-  assignments!: Assignment[];
+    @OneToMany(() => Assignment, assignment => assignment.person)
+    assignments!: Assignment[];
 
-  // add constructor
-  constructor(account: string, name: string, department: string, position: string, contact: string) {
-    this.account = account;
-    this.name = name;
-    this.department = department;
-    this.position = position;
-    this.contact = contact;
-  } 
+    @ManyToMany(() => Meeting, meeting => meeting.participants)
+    meetings!: Meeting[];
 
+    constructor(name: string = "", account: string = "", contact: string = "") {
+        this.name = name;
+        this.account = account;
+        this.contact=contact;
+    }
 }

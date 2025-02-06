@@ -22,7 +22,7 @@ export class Assignment {
   @ManyToOne(() => Seat, seat => seat.assignments)
   seat: Seat;
 
-  @ManyToOne(() => Person, person => person.assignments)
+  @ManyToOne(() => Person, person => person.account)
   person: Person;
 
   // add constructor
